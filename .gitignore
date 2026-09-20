@@ -4,3 +4,7 @@
 /frontend/.next/
 /frontend/.env*.local
 .DS_Store
+
+# Internal planning docs, not part of the public submission
+/DECISIONS.md
+/gaskiya-hackathon-spec.md
