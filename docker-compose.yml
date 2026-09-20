@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gaskiya
+      POSTGRES_PASSWORD: gaskiya
+      POSTGRES_DB: gaskiya
+    ports:
+      - "5432:5432"
+    volumes:
+      - gaskiya-postgres-data:/var/lib/postgresql/data
+
+  # Local IPFS daemon fallback (spec Section 9): anchors pin here for real,
+  # content-addressed and independently verifiable, without depending on a
+  # third-party pinning service's API key during judging.
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "5001:5001" # HTTP API, used by the backend to add/pin batch manifests
+      - "8081:8080" # gateway, for resolving a CID to its content in a browser
+    volumes:
+      - gaskiya-ipfs-data:/data/ipfs
+
+volumes:
+  gaskiya-postgres-data:
+  gaskiya-ipfs-data:
